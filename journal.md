@@ -20,6 +20,8 @@ Temps de visionnage par vidéo : non fourni par Metricool pour l'instant (champ 
 3. **Très peu de commentaires** : une question ouverte (« écris ta question ») demande trop d'effort.
 4. L'intrus v1 a montré que les gens partent dès la 1re seconde si l'enjeu n'est pas visible immédiatement.
 
+5. (18/10) Les stats de l'énigme #02 (publiée le 17/10 à 18 h, vidéo TikTok 7697668632939138326) ne sont pas encore remontées dans Metricool le lendemain matin : Metricool a ~24-48 h de retard sur TikTok → juger chaque test à J+2 plutôt qu'à J+1.
+
 ## Plan de tests (dans l'ordre, un par vidéo ou par série de 2)
 - T1 — **Énigme d'abord, réponse d'hier à la fin** (les nouveaux spectateurs ne connaissent pas l'énigme d'hier : la réponse en ouverture leur fait swiper). Accroche voix + texte dès 0,0 s : l'enjeu en une phrase.
 - T2 — **Réponse en un mot ou une lettre** (choix A/B/C/D ou un nombre) + premier commentaire épinglable rédigé par le compte (« Moi j'ai dit B… et toi ? »).
@@ -30,3 +32,9 @@ Temps de visionnage par vidéo : non fourni par Metricool pour l'instant (champ 
 ## Historique des tests
 | Date | Énigme | Test appliqué | Vues (J+1) | J'aime | Comm. | Partages | Verdict |
 |---|---|---|---|---|---|---|---|
+| 15/10 | #01 Deux portes | référence (donjon + voix, question ouverte) | 263 | 12 | 2 | 0 | référence — 5,3 % (j'aime+comm.)/vues |
+| 17/10 | #02 Les 1000 bouteilles | aucun (avant le plan) | — (pas encore dans Metricool au 18/10) | — | — | — | à confirmer |
+| 18/10 | #03 Les 3 boîtes menteuses | **T1** énigme d'abord (enjeu dit + écrit à 0,0 s), réponse de #02 à la fin (6,6 s) + boucle ; choix A/B/C et 1er commentaire auto (règles actées) ; 30,5 s, chrono 8 s, 18:00 | | | | | à remplir |
+
+Note : avec le choix A/B/C et le premier commentaire désormais imposés par les règles actées, T2 est de fait déjà appliqué → prochain test = **T3 (durée 20-25 s, chrono 6 s)**.
+Scripts de génération (image, son, voix, vérification) : `outils/generateur/`.

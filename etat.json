@@ -1,8 +1,27 @@
 {
-  "derniere_enigme_publiee": 2,
-  "date_derniere_publication": "2026-10-17",
+  "derniere_enigme_publiee": 3,
+  "date_derniere_publication": "2026-10-18",
   "historique": [
-    {"numero": 1, "titre": "Les deux portes", "date": "2026-10-15", "canal": "Chrome (manuel)"},
-    {"numero": 2, "titre": "Les 1000 bouteilles du roi", "date": "2026-10-17", "heure": "18:00 Europe/Paris", "canal": "Metricool"}
+    {
+      "numero": 1,
+      "titre": "Les deux portes",
+      "date": "2026-10-15",
+      "canal": "Chrome (manuel)"
+    },
+    {
+      "numero": 2,
+      "titre": "Les 1000 bouteilles du roi",
+      "date": "2026-10-17",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool"
+    },
+    {
+      "numero": 3,
+      "titre": "Les 3 boîtes mal étiquetées",
+      "date": "2026-10-18",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T1"
+    }
   ]
 }
