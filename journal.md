@@ -33,8 +33,12 @@ Temps de visionnage par vidéo : non fourni par Metricool pour l'instant (champ 
 | Date | Énigme | Test appliqué | Vues (J+1) | J'aime | Comm. | Partages | Verdict |
 |---|---|---|---|---|---|---|---|
 | 15/10 | #01 Deux portes | référence (donjon + voix, question ouverte) | 263 | 12 | 2 | 0 | référence — 5,3 % (j'aime+comm.)/vues |
-| 17/10 | #02 Les 1000 bouteilles | aucun (avant le plan) | — (pas encore dans Metricool au 18/10) | — | — | — | à confirmer |
-| 18/10 | #03 Les 3 boîtes menteuses | **T1** énigme d'abord (enjeu dit + écrit à 0,0 s), réponse de #02 à la fin (6,6 s) + boucle ; choix A/B/C et 1er commentaire auto (règles actées) ; 30,5 s, chrono 8 s, 18:00 | | | | | à remplir |
+| 17/10 | #02 Les 1000 bouteilles | aucun (avant le plan) ; 37 s | 289 | 10 | 1 | 0 | pas de test — vues dans la moyenne des 3 précédentes (304, −5 %), engagement 3,8 % > moyenne 3,0 % (le donjon + voix confirme son avance) |
+| 18/10 | #03 Les 3 boîtes menteuses | **T1** énigme d'abord (enjeu dit + écrit à 0,0 s), réponse de #02 à la fin (6,6 s) + boucle ; choix A/B/C et 1er commentaire auto (règles actées) ; 30,5 s, chrono 8 s, 18:00 | — (pas encore dans Metricool au 19/10 matin) | | | | à confirmer (juger le 20/10) |
+| 19/10 | #04 Les chapeaux du cachot | T1 conservé (en attente de verdict) + **T3** durée courte : 24,9 s, chrono 6 s, réponse de #03 en 5 s ; réponse en un mot (BLANC/NOIR) ; 18:00 | | | | | à remplir |
 
 Note : avec le choix A/B/C et le premier commentaire désormais imposés par les règles actées, T2 est de fait déjà appliqué → prochain test = **T3 (durée 20-25 s, chrono 6 s)**.
-Scripts de génération (image, son, voix, vérification) : `outils/generateur/`.
+6. (19/10) Confirmé : la vidéo de la veille n'apparaît pas dans Metricool le lendemain matin (#03 absente au 19/10) ; #02 est remontée à J+2 (289 vues, 10 j'aime, 1 comm.). Les durées 24 s et 37 s font des vues similaires (267 vs 289) : la durée seule ne débloque pas le plafond de ~300 vues.
+
+Scripts de génération (image, son, voix, vérification) : `outils/generateur/` (version #04 autonome dans `outils/generateur/enigme04/`, à concaténer déjà faite : video04.py, audio04.py, verif04.py).
+Prochain test après verdicts de T1/T3 : **T4 (heure conseillée Metricool)**.

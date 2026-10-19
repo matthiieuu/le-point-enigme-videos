@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 3,
-  "date_derniere_publication": "2026-10-18",
+  "derniere_enigme_publiee": 4,
+  "date_derniere_publication": "2026-10-19",
   "historique": [
     {
       "numero": 1,
@@ -22,6 +22,14 @@
       "heure": "18:00 Europe/Paris",
       "canal": "Metricool",
       "test": "T1"
+    },
+    {
+      "numero": 4,
+      "titre": "Les chapeaux du cachot",
+      "date": "2026-10-19",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T3"
     }
   ]
 }
