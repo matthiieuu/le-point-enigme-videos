@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 4,
-  "date_derniere_publication": "2026-10-19",
+  "derniere_enigme_publiee": 5,
+  "date_derniere_publication": "2026-10-20",
   "historique": [
     {
       "numero": 1,
@@ -30,6 +30,15 @@
       "heure": "18:00 Europe/Paris",
       "canal": "Metricool",
       "test": "T3"
+    },
+    {
+      "numero": 5,
+      "titre": "Le code de la bombe",
+      "date": "2026-10-20",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T4",
+      "metricool_uuid": "5489675182143786928"
     }
   ]
 }

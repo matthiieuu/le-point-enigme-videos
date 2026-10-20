@@ -32,13 +32,17 @@ Temps de visionnage par vidéo : non fourni par Metricool pour l'instant (champ 
 ## Historique des tests
 | Date | Énigme | Test appliqué | Vues (J+1) | J'aime | Comm. | Partages | Verdict |
 |---|---|---|---|---|---|---|---|
-| 15/10 | #01 Deux portes | référence (donjon + voix, question ouverte) | 263 | 12 | 2 | 0 | référence — 5,3 % (j'aime+comm.)/vues |
-| 17/10 | #02 Les 1000 bouteilles | aucun (avant le plan) ; 37 s | 289 | 10 | 1 | 0 | pas de test — vues dans la moyenne des 3 précédentes (304, −5 %), engagement 3,8 % > moyenne 3,0 % (le donjon + voix confirme son avance) |
-| 18/10 | #03 Les 3 boîtes menteuses | **T1** énigme d'abord (enjeu dit + écrit à 0,0 s), réponse de #02 à la fin (6,6 s) + boucle ; choix A/B/C et 1er commentaire auto (règles actées) ; 30,5 s, chrono 8 s, 18:00 | — (pas encore dans Metricool au 19/10 matin) | | | | à confirmer (juger le 20/10) |
-| 19/10 | #04 Les chapeaux du cachot | T1 conservé (en attente de verdict) + **T3** durée courte : 24,9 s, chrono 6 s, réponse de #03 en 5 s ; réponse en un mot (BLANC/NOIR) ; 18:00 | | | | | à remplir |
+| 15/10 | #01 Deux portes | référence (donjon + voix, question ouverte) | 263 → 275 | 12 | 2 | 0 | référence — 5,3 % (j'aime+comm.)/vues |
+| 17/10 | #02 Les 1000 bouteilles | aucun (avant le plan) ; 37 s | 289 (J+2) → 323 (J+3) | 10 → 11 | 1 | 0 | pas de test — vues dans la moyenne des 3 précédentes (304, −5 %), engagement 3,8 % > moyenne 3,0 % (le donjon + voix confirme son avance) |
+| 18/10 | #03 Les 3 boîtes menteuses | **T1** énigme d'abord (enjeu dit + écrit à 0,0 s), réponse de #02 à la fin (6,6 s) + boucle ; choix A/B/C et 1er commentaire auto (règles actées) ; 30,5 s, chrono 8 s, 18:00 | 252 (J+2) | 7 | 1 | 0 | **abandonné** selon la règle : vues −20 % (moy. 3 préc. 315) et engagement 3,2 % vs 3,5 % (−9 %). Mais revenir à « réponse d'hier en ouverture » violerait la règle actée n°4 (enjeu dès 0,0 s) → on garde l'ordre énigme d'abord ; le levier des vues est à chercher ailleurs (heure, couverture, accroche) |
+| 19/10 | #04 Les chapeaux du cachot | T1 conservé (en attente de verdict) + **T3** durée courte : 24,9 s, chrono 6 s, réponse de #03 en 5 s ; réponse en un mot (BLANC/NOIR) ; 18:00 | — (pas encore dans Metricool au 20/10 matin) | | | | à confirmer (juger le 21/10) |
+| 20/10 | #05 Le code de la bombe | format #04 conservé (26,0 s, chrono 6 s, T3 en attente) + **T4 heure** : 12:00 (créneau Metricool du mardi : 10 h = 1136 déjà passé à 11 h, 12 h = 1082, 18 h = 1119) ; choix A ÷ / B × / C + ; saboteur qui parle en bulle ; 1er commentaire « Indice : 4 × 6 est un piège » | | | | | à remplir (juger le 22/10) |
 
 Note : avec le choix A/B/C et le premier commentaire désormais imposés par les règles actées, T2 est de fait déjà appliqué → prochain test = **T3 (durée 20-25 s, chrono 6 s)**.
 6. (19/10) Confirmé : la vidéo de la veille n'apparaît pas dans Metricool le lendemain matin (#03 absente au 19/10) ; #02 est remontée à J+2 (289 vues, 10 j'aime, 1 comm.). Les durées 24 s et 37 s font des vues similaires (267 vs 289) : la durée seule ne débloque pas le plafond de ~300 vues.
 
-Scripts de génération (image, son, voix, vérification) : `outils/generateur/` (version #04 autonome dans `outils/generateur/enigme04/`, à concaténer déjà faite : video04.py, audio04.py, verif04.py).
+Scripts de génération (image, son, voix, vérification) : `outils/generateur/` (version #04 dans `outils/generateur/enigme04/`, version #05 « bombe + saboteur » dans `outils/generateur/enigme05/` : video05.py, audio05.py, verif05.py, voix.py, lignes.json).
 Prochain test après verdicts de T1/T3 : **T4 (heure conseillée Metricool)**.
+7. (20/10) Toutes les vidéos restent entre 250 et 350 vues, quel que soit le format testé (durée, ordre énigme/réponse) : les écarts de ±20 % ressemblent à du bruit autour du premier lot de diffusion TikTok. Les vidéos se stabilisent vers J+3 (#02 : 289 à J+2 → 323 à J+3) → comparer les vidéos au même âge. Partages toujours à 0 : aucune vidéo n'a encore donné envie d'être envoyée à un ami.
+8. (20/10) T4 appliqué à #05 : publication à 12:00 au lieu de 18:00. Pour T4 suivant (si 12 h n'est pas concluant) : viser 10:00 ou 18:00 selon getBestTimeToPostByNetwork, en programmant avant 10 h.
+Prochain test après T4 : **T5 (couverture : contrainte + question en gros texte, via videoCoverMilliseconds sur l'image la plus lisible)**.
