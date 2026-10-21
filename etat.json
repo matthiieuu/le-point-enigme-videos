@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 5,
-  "date_derniere_publication": "2026-10-20",
+  "derniere_enigme_publiee": 6,
+  "date_derniere_publication": "2026-10-21",
   "historique": [
     {
       "numero": 1,
@@ -39,6 +39,15 @@
       "canal": "Metricool",
       "test": "T4",
       "metricool_uuid": "5489675182143786928"
+    },
+    {
+      "numero": 6,
+      "titre": "Les deux cordes",
+      "date": "2026-10-21",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T5",
+      "metricool_uuid": "7450727807030413448"
     }
   ]
 }
