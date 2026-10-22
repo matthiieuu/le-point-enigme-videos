@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 6,
-  "date_derniere_publication": "2026-10-21",
+  "derniere_enigme_publiee": 7,
+  "date_derniere_publication": "2026-10-22",
   "historique": [
     {
       "numero": 1,
@@ -48,6 +48,15 @@
       "canal": "Metricool",
       "test": "T5",
       "metricool_uuid": "7450727807030413448"
+    },
+    {
+      "numero": 7,
+      "titre": "L'île des menteurs",
+      "date": "2026-10-22",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T6",
+      "metricool_uuid": "-1911454973395908855"
     }
   ]
 }
