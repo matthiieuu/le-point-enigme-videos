@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 9,
-  "date_derniere_publication": "2026-10-24",
+  "derniere_enigme_publiee": 10,
+  "date_derniere_publication": "2026-10-25",
   "historique": [
     {
       "numero": 1,
@@ -75,6 +75,15 @@
       "canal": "Metricool",
       "test": "T7",
       "metricool_uuid": "-1484186091125782115"
+    },
+    {
+      "numero": 10,
+      "titre": "Les aiguilles à 3 h 15",
+      "date": "2026-10-25",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T9",
+      "metricool_uuid": "-2884173127808695063"
     }
   ]
 }
