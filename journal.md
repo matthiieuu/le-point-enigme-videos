@@ -73,3 +73,20 @@ Prochain test après T9 : **T10 — 1er commentaire provocant** (à isoler propr
 Version #11 « mère + détective + 3 filles, cartes d'indices, maison d'en face » dans `outils/generateur/enigme11/` (video11.py, audio11.py, verif11.py, voix.py, lignes.json).
 **Banque : après #11, il ne reste qu'une énigme (#12 Monty Hall)** → Matthieu prévenu le 26/10 ; il faut de nouvelles énigmes (de préférence « piège », solution vérifiée par script).
 Prochain test après T10 : **T11 — énigme piège à réponse intuitive fausse annoncée dès 0,0 s** (« 90 % se trompent » seulement si c'est vrai ; sinon « la réponse évidente est fausse »), à mesurer contre les énigmes de pure déduction.
+
+16. (26/10, demande de Matthieu) **#09 « L'escargot dans le puits » atteint 26 775 vues, 291 j'aime, 215 commentaires, 7 partages** (≈ 25× la moyenne des autres). Chiffres au 26/10 : #08 1947, #10 1600, #04 1450, #05 1045, #07 950. Matthieu demande de **s'inspirer de #09** et de **mettre un HOOK au début de chaque vidéo**. Ce qu'on reprend de #09 : (a) une situation comprise en UNE phrase avec des nombres simples à l'écran (10 m, +3, −2) ; (b) un humain dont le sort dépend de la réponse ; (c) une réponse intuitive FAUSSE parmi les choix (10 jours) qui pousse à corriger les autres en commentaire ; (d) 3 choix numériques courts.
+
+## RÈGLE ACTÉE — HOOK (à partir de #12, demande de Matthieu du 26/10)
+Les 1,5 premières secondes doivent arrêter le pouce :
+- **Image 1 déjà en mouvement** (pas de fondu depuis le noir) : zoom-punch rapide (110 % → 100 % en 0,4 s) sur le personnage en danger + coup d'impact/whoosh sonore à 0,0 s + léger tremblement.
+- **Gros texte choc de 2 à 5 mots au centre de l'écran** (jaune, contour noir épais, ~120 px), qui s'écrase avec le son, puis remonte en titre : ex. « LA RÉPONSE ÉVIDENTE EST FAUSSE », « TU AS 10 SECONDES », « PIÈGE : NE RÉPONDS PAS TROP VITE ». Une affirmation chiffrée (« 9 personnes sur 10 se trompent ») seulement si elle est vraie/documentée.
+- **Voix à 0,0 s** : la 1re phrase = hook + enjeu en ≤ 2,5 s (« Ne réponds pas trop vite : ce prisonnier ne sort que si tu trouves… »).
+- Pastille rouge « PIÈGE » visible dès 0,0 s quand l'énigme en est un.
+- Garder tout le reste du format #09 (personnage humain au centre, 3 choix numériques dont la réponse intuitive fausse, réponse d'hier ≤ 4 s, boucle).
+
+## Banque d'énigmes « piège » ajoutée le 26/10 (après #12, solutions vérifiées par `outils/verif_banque/verif_13_17.py`)
+- #13 LA BALLE ET LA BATTE — ensemble 1,10 € ; la batte coûte 1 € de plus que la balle. Prix de la balle ? Choix 10 cts / 5 cts / 1 € → **5 centimes** (piège : 10 cts).
+- #14 LES NÉNUPHARS — ils doublent chaque jour et couvrent tout le lac au jour 48. Quel jour le lac est-il à moitié couvert ? Choix 24 / 47 / 46 → **47** (piège : 24).
+- #15 LES MACHINES DU FORGERON — 5 machines font 5 épées en 5 min. Combien de temps pour 100 machines et 100 épées ? Choix 100 / 5 / 20 min → **5 minutes** (piège : 100).
+- #16 LA COURSE — tu doubles le 2e. Tu es à quelle place ? Choix 1er / 2e / 3e → **2e** (piège : 1er).
+- #17 LES CHAUSSETTES DANS LE NOIR — 10 noires et 10 blanches mélangées, dans le noir. Combien en prendre minimum pour être SÛR d'avoir une paire ? Choix 2 / 3 / 11 → **3** (piège : 11).
