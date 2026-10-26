@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 10,
-  "date_derniere_publication": "2026-10-25",
+  "derniere_enigme_publiee": 11,
+  "date_derniere_publication": "2026-10-26",
   "historique": [
     {
       "numero": 1,
@@ -84,6 +84,15 @@
       "canal": "Metricool",
       "test": "T9",
       "metricool_uuid": "-2884173127808695063"
+    },
+    {
+      "numero": 11,
+      "titre": "L'âge des trois filles",
+      "date": "2026-10-26",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T10",
+      "metricool_uuid": "-4255865263152018771"
     }
   ]
 }
