@@ -13,14 +13,14 @@ def F(s):
 
 NUM = "12"; TITRE = "LES 3 PORTES DU GARDIEN"; CONTRAINTE = "UNE SEULE PORTE = LA LIBERTÉ"
 TITRE_HIER = "L'ÂGE DES TROIS FILLES"
-HOOK = ["LA RÉPONSE", "ÉVIDENTE", "EST FAUSSE"]
+HOOK = ["UNE SEULE", "PORTE", "LE LIBÈRE"]
 CHR = 6.0
 D = json.load(open('durees.json'))
-SUBS = ["La réponse évidente est fausse… et il risque tout !",
-        "Une seule de ces 3 portes mène à la sortie.",
+SUBS = ["Une seule de ces 3 portes le libère !",
+        "Derrière les 2 autres : un mur.",
         "Il choisit la porte 1. Le gardien, qui sait tout, ouvre la porte 3 : un mur !",
-        "Puis il demande : tu gardes ta porte, ou tu changes ?",
-        "Alors : garder, changer, ou ça ne change rien ?",
+        "Puis il demande : tu gardes la porte 1, ou tu changes pour la 2 ?",
+        "Alors : garder, changer, ou c'est pareil ?",
         "Écris un seul mot. Réponse demain !",
         "Réponse d'hier : 9 ans ! 2, 2 et 9."]
 NL = len(SUBS)
@@ -40,8 +40,8 @@ FADE = s6 + D[6] + 0.45
 T = FADE + 0.4
 STARTS = [s0, s1, s2, s3, s4, s5, s6]
 NF = int(round(T * FPS))
-KEY = [["réponse", "évidente", "fausse", "risque"], ["seule", "3", "portes", "sortie"], ["1", "gardien", "3", "mur"],
-       ["gardes", "changes"], ["garder", "changer", "rien"], ["mot", "demain"], ["9", "ans", "2"]]
+KEY = [["seule", "3", "portes", "libère"], ["2", "mur"], ["1", "gardien", "3", "mur"],
+       ["gardes", "1", "changes", "2"], ["garder", "changer", "pareil"], ["mot", "demain"], ["9", "ans", "2"]]
 TORCH = [(395, 500), (685, 500)]
 
 exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'parts.py')).read())
@@ -142,7 +142,7 @@ def init():
 
 BUBS = [  # (perso, texte, t0, t1, cx, cy, tail_x)
     ('PRISONNIER', "Je prends la 1 !", lambda: T_UN - 0.1, lambda: T_OUVRE - 0.1, 440, 790, 330),
-    ('GARDIEN', "Tu gardes ta porte… ou tu changes ?", lambda: s3 + 0.1, lambda: s4 + 0.4, 600, 770, 790),
+    ('GARDIEN', "Tu gardes la 1… ou tu prends la 2 ?", lambda: s3 + 0.1, lambda: s4 + 0.4, 600, 770, 790),
 ]
 
 def cam(t):
@@ -186,12 +186,12 @@ def scene(t):
         badge(d, DOORS[2], 600, "MUR", u, fill=RED, tcol=(255, 255, 255), size=46)
     if T_UN <= t < s3:
         u = ease_back((t - T_UN) / 0.3)
-        badge(d, DOORS[0], 400, "SON CHOIX", u, fill=(255, 150, 40), size=36)
+        badge(d, DOORS[0], 400, "SON CHOIX", u, fill=(255, 150, 40), size=46)
     if t >= T_GARDE - 0.1 and t < ANS:
         u0 = ease_back((t - (T_GARDE - 0.1)) / 0.3)
-        badge(d, DOORS[0], 400, "GARDER ?", u0, fill=(255, 150, 40), size=36)
+        badge(d, DOORS[0], 400, "GARDER ?", u0, fill=(255, 150, 40), size=46)
         u1 = ease_back((t - (T_GARDE + 0.5)) / 0.3)
-        badge(d, DOORS[1], 400, "CHANGER ?", u1, fill=(80, 150, 230), tcol=(255, 255, 255), size=36)
+        badge(d, DOORS[1], 400, "CHANGER ?", u1, fill=(80, 150, 230), tcol=(255, 255, 255), size=46)
     # personnages
     bl = (t % 3.2) < 0.12
     mp = mouth_at(2, t) if T_UN - 0.3 <= t < T_OUVRE - 0.3 else 0
@@ -262,7 +262,7 @@ def ui_top(img, d, t, answer=False):
         d.rounded_rectangle([W / 2 - tw / 2 - 26, 252, W / 2 + tw / 2 + 26, 312], radius=30, fill=(200, 44, 44))
         d.text((W / 2, 283), CONTRAINTE, font=f3, fill=(255, 255, 255), anchor='mm')
 
-CHX = ['GARDER', 'CHANGER', '50/50']
+CHX = ['GARDER', 'CHANGER', 'PAREIL']
 CHC = [(255, 150, 40), (80, 150, 230), (180, 110, 230)]
 def choices(img, d, t):
     T0 = wtime(4, 'garder') - 0.2
