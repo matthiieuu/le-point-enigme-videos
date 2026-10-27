@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 11,
-  "date_derniere_publication": "2026-10-26",
+  "derniere_enigme_publiee": 12,
+  "date_derniere_publication": "2026-10-27",
   "historique": [
     {
       "numero": 1,
@@ -93,6 +93,16 @@
       "canal": "Metricool",
       "test": "T10",
       "metricool_uuid": "-4255865263152018771"
+    },
+    {
+      "numero": 12,
+      "titre": "Les 3 portes du gardien (Monty Hall)",
+      "date": "2026-10-27",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T11 + HOOK",
+      "hook": "LA RÉPONSE ÉVIDENTE EST FAUSSE",
+      "metricool_uuid": "7955222404937173243"
     }
   ]
 }
