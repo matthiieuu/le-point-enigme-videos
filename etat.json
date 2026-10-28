@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 12,
-  "date_derniere_publication": "2026-10-27",
+  "derniere_enigme_publiee": 13,
+  "date_derniere_publication": "2026-10-28",
   "historique": [
     {
       "numero": 1,
@@ -103,6 +103,15 @@
       "test": "T11 + HOOK",
       "hook": "LA RÉPONSE ÉVIDENTE EST FAUSSE",
       "metricool_uuid": "7955222404937173243"
+    },
+    {
+      "numero": 13,
+      "titre": "La balle et la batte",
+      "date": "2026-10-28",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T12",
+      "metricool_uuid": "-6489360672879132186"
     }
   ]
 }
