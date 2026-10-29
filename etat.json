@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 13,
-  "date_derniere_publication": "2026-10-28",
+  "derniere_enigme_publiee": 14,
+  "date_derniere_publication": "2026-10-29",
   "historique": [
     {
       "numero": 1,
@@ -112,6 +112,15 @@
       "canal": "Metricool",
       "test": "T12",
       "metricool_uuid": "-6489360672879132186"
+    },
+    {
+      "numero": 14,
+      "titre": "Les nénuphars du cachot",
+      "date": "2026-10-29",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "heure 12:00 (exploration)",
+      "metricool_uuid": "5195311582848830116"
     }
   ]
 }
