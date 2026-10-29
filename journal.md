@@ -110,3 +110,19 @@ Hooks utilisés : #12 v2 « UNE SEULE PORTE LE LIBÈRE » (constat d'enjeu) ; #1
 Version #13 « table du gardien, batte + balle, prisonnier enchaîné » dans `outils/generateur/enigme13/` (video13.py généré depuis video12.py + scene13.py + answer13.py ; parts.py, audio13.py, voix.py, lignes.json).
 Prochain test après T12 : **T13 — énigme piège à 2 choix seulement** (ex. #16 la course : 1er / 2e), puis T14 — couverture = hook (videoCoverMilliseconds 300).
 **Banque : après #13, il reste 4 énigmes (#14-#17).**
+
+## RÈGLE ACTÉE — HEURE STRATÉGIQUE (29/10, demande de Matthieu : « publier à des heures plus stratégiques en fonction des vues »)
+Annule « 18:00 fixe » (verdict T9 du 27/10, faussé par #09 qui écrase la moyenne). Créneaux candidats = **10:00, 12:00, 18:00** (les 3 pics TikTok du compte chaque jour selon getBestTimeToPostByNetwork au 29/10 : 10 h = 1er pic tous les jours, ex. jeudi 10 h 1471 / 18 h 1378 / 12 h 1299 ; week-end environ 2× plus faible). On compare les créneaux à la **médiane** des vues (pas la moyenne).
+- Exploration : tant qu'un créneau atteignable a moins de 3 vidéos, on le remplit en priorité.
+- Exploitation : ensuite, le créneau atteignable à la meilleure médiane ; départage par getBestTimeToPostByNetwork du jour si les médianes sont à < 10 %.
+- La tâche quotidienne tourne désormais à **07:41** (au lieu de 10:54) pour que 10:00 soit atteignable.
+
+### VUES PAR CRÉNEAU (heure de Paris réelle de publication ; vues au 29/10 ; à mettre à jour chaque jour)
+| Créneau | Vidéos (vues) | Nb | Médiane |
+|---|---|---|---|
+| 10:00 | — | 0 | — (jamais testé, 1er pic Metricool) |
+| 12:00 | #05 1058, #10 1996 | 2 | **1527** |
+| 18:00 | #02 451, #03 423, #04 1465, #06 631, #07 970, #08 2013, #09 30 236, #11 428, #12 453 (J+2 incomplet), #13 (à venir) | 9 | **631** |
+| autres | #01 17:12 → 386 ; avant-série 13 h → 353, 21 h → 358, 22 h → 422 | 4 | 372 |
+Lecture : à contenu comparable, 12 h fait ~2,4× la médiane de 18 h (mais seulement 2 vidéos, dont #10 qui est un piège) → 12 h et 10 h à explorer en priorité. Le contenu « piège » reste le 1er levier (#09).
+Plan : 29/10 #14 → 12:00 (3e vidéo à 12 h ; 10 h n'est plus atteignable aujourd'hui) ; puis 10:00 pour les 3 suivantes ; ensuite exploitation.
