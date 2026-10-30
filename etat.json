@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 14,
-  "date_derniere_publication": "2026-10-29",
+  "derniere_enigme_publiee": 15,
+  "date_derniere_publication": "2026-10-30",
   "historique": [
     {
       "numero": 1,
@@ -121,6 +121,16 @@
       "canal": "Metricool",
       "test": "heure 12:00 (exploration)",
       "metricool_uuid": "5195311582848830116"
+    },
+    {
+      "numero": 15,
+      "titre": "Les machines du forgeron",
+      "date": "2026-10-30",
+      "heure": "10:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T13 (2 choix) + heure 10:00 (exploration)",
+      "hook": "LE BON TEMPS LE LIBÈRE",
+      "metricool_uuid": "-2276314877790761025"
     }
   ]
 }
