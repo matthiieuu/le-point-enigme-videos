@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 15,
-  "date_derniere_publication": "2026-10-30",
+  "derniere_enigme_publiee": 16,
+  "date_derniere_publication": "2026-10-31",
   "historique": [
     {
       "numero": 1,
@@ -131,6 +131,16 @@
       "test": "T13 (2 choix) + heure 10:00 (exploration)",
       "hook": "LE BON TEMPS LE LIBÈRE",
       "metricool_uuid": "-2276314877790761025"
+    },
+    {
+      "numero": 16,
+      "titre": "La course du cachot",
+      "date": "2026-10-31",
+      "heure": "10:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T14 (couverture = hook, videoCoverMilliseconds 300) + heure 10:00 (exploration)",
+      "hook": "LA BONNE PLACE LE LIBÈRE",
+      "metricool_uuid": "3342985905562140810"
     }
   ]
 }
