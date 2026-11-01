@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 16,
-  "date_derniere_publication": "2026-10-31",
+  "derniere_enigme_publiee": 17,
+  "date_derniere_publication": "2026-11-01",
   "historique": [
     {
       "numero": 1,
@@ -141,6 +141,15 @@
       "test": "T14 (couverture = hook, videoCoverMilliseconds 300) + heure 10:00 (exploration)",
       "hook": "LA BONNE PLACE LE LIBÈRE",
       "metricool_uuid": "3342985905562140810"
+    },
+    {
+      "numero": 17,
+      "titre": "Les chaussettes du cachot",
+      "date": "2026-11-01",
+      "heure": "10:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T15",
+      "metricool_uuid": "-4609940057057312296"
     }
   ]
 }
