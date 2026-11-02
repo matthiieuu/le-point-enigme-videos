@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 17,
-  "date_derniere_publication": "2026-11-01",
+  "derniere_enigme_publiee": 18,
+  "date_derniere_publication": "2026-11-02",
   "historique": [
     {
       "numero": 1,
@@ -150,6 +150,15 @@
       "canal": "Metricool",
       "test": "T15",
       "metricool_uuid": "-4609940057057312296"
+    },
+    {
+      "numero": 18,
+      "titre": "Les moutons du berger",
+      "date": "2026-11-02",
+      "heure": "10:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T16",
+      "metricool_uuid": "-3451129133262945087"
     }
   ]
 }
