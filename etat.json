@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 18,
-  "date_derniere_publication": "2026-11-02",
+  "derniere_enigme_publiee": 19,
+  "date_derniere_publication": "2026-11-06",
   "historique": [
     {
       "numero": 1,
@@ -159,6 +159,16 @@
       "canal": "Metricool",
       "test": "T16",
       "metricool_uuid": "-3451129133262945087"
+    },
+    {
+      "numero": 19,
+      "titre": "Les pilules du geôlier",
+      "date": "2026-11-06",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T17 (piège moins connu) + heure 12:00 (exploitation)",
+      "hook": "3 PILULES ET IL EST LIBRE",
+      "metricool_uuid": "130296747893933469"
     }
   ]
 }
