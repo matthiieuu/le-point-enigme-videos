@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 19,
-  "date_derniere_publication": "2026-11-06",
+  "derniere_enigme_publiee": 20,
+  "date_derniere_publication": "2026-11-10",
   "historique": [
     {
       "numero": 1,
@@ -169,6 +169,15 @@
       "test": "T17 (piège moins connu) + heure 12:00 (exploitation)",
       "hook": "3 PILULES ET IL EST LIBRE",
       "metricool_uuid": "130296747893933469"
+    },
+    {
+      "numero": 20,
+      "titre": "Les mois à 28 jours",
+      "date": "2026-11-10",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T18",
+      "metricool_uuid": "-1478668987657533545"
     }
   ]
 }
