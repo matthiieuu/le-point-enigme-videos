@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 20,
-  "date_derniere_publication": "2026-11-10",
+  "derniere_enigme_publiee": 21,
+  "date_derniere_publication": "2026-11-11",
   "historique": [
     {
       "numero": 1,
@@ -178,6 +178,16 @@
       "canal": "Metricool",
       "test": "T18",
       "metricool_uuid": "-1478668987657533545"
+    },
+    {
+      "numero": 21,
+      "titre": "Les chats de la ferme",
+      "date": "2026-11-11",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T19 (décor hors cachot) + T18 conservé (en attente)",
+      "hook": "100 SOURIS VONT RUINER SA FERME",
+      "metricool_uuid": "6715971071289149220"
     }
   ]
 }
