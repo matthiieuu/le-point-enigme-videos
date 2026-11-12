@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 21,
-  "date_derniere_publication": "2026-11-11",
+  "derniere_enigme_publiee": 22,
+  "date_derniere_publication": "2026-11-12",
   "historique": [
     {
       "numero": 1,
@@ -188,6 +188,16 @@
       "test": "T19 (décor hors cachot) + T18 conservé (en attente)",
       "hook": "100 SOURIS VONT RUINER SA FERME",
       "metricool_uuid": "6715971071289149220"
+    },
+    {
+      "numero": 22,
+      "titre": "Le train et le tunnel",
+      "date": "2026-11-12",
+      "heure": "12:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T20 (hook = question directe à l'écran dès 0,0 s) + T18/T19 conservés (en attente)",
+      "hook": "1, 2 OU 3 MINUTES ? / IL EST LIBRE S'IL TROUVE",
+      "metricool_uuid": "1833200795744095771"
     }
   ]
 }
