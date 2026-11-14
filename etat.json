@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 23,
-  "date_derniere_publication": "2026-11-13",
+  "derniere_enigme_publiee": 24,
+  "date_derniere_publication": "2026-11-14",
   "historique": [
     {
       "numero": 1,
@@ -208,6 +208,16 @@
       "test": "T21 (personnage enfant « le petit » au centre au lieu du prisonnier) + T18/T19/T20 conservés (en attente)",
       "hook": "10, 9 OU 5 MINUTES ? / SINON, IL EST VIRÉ !",
       "metricool_uuid": "-1365664694049812518"
+    },
+    {
+      "numero": 24,
+      "titre": "Les poteaux de la clôture",
+      "date": "2026-11-14",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T22 (réponse d'hier : la réponse piège « 10 minutes » barrée en rouge) + T21 conservé (en attente) ; T18/T19/T20 abandonnés (voix 0.92, donjon, hook constat d'enjeu)",
+      "hook": "COMPTE SES POTEAUX / OU IL EST VIRÉ !",
+      "metricool_uuid": "-1266151071824261544"
     }
   ]
 }
