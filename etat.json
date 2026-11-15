@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 24,
-  "date_derniere_publication": "2026-11-14",
+  "derniere_enigme_publiee": 25,
+  "date_derniere_publication": "2026-11-15",
   "historique": [
     {
       "numero": 1,
@@ -218,6 +218,16 @@
       "test": "T22 (réponse d'hier : la réponse piège « 10 minutes » barrée en rouge) + T21 conservé (en attente) ; T18/T19/T20 abandonnés (voix 0.92, donjon, hook constat d'enjeu)",
       "hook": "COMPTE SES POTEAUX / OU IL EST VIRÉ !",
       "metricool_uuid": "-1266151071824261544"
+    },
+    {
+      "numero": 25,
+      "titre": "L'escalier de la tour",
+      "date": "2026-11-15",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T23 (les 3 choix visibles dès 0,0 s sous le hook) + T21 (enfant) et T22 (réponse piège barrée) conservés en attente",
+      "metricool_uuid": "-7180177306231226330",
+      "hook": "UNE MARCHE DE TROP / ET IL EST VIRÉ !"
     }
   ]
 }
