@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 25,
-  "date_derniere_publication": "2026-11-15",
+  "derniere_enigme_publiee": 26,
+  "date_derniere_publication": "2026-11-16",
   "historique": [
     {
       "numero": 1,
@@ -228,6 +228,15 @@
       "test": "T23 (les 3 choix visibles dès 0,0 s sous le hook) + T21 (enfant) et T22 (réponse piège barrée) conservés en attente",
       "metricool_uuid": "-7180177306231226330",
       "hook": "UNE MARCHE DE TROP / ET IL EST VIRÉ !"
+    },
+    {
+      "numero": 26,
+      "titre": "Les bougies du cachot",
+      "date": "2026-11-16",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T24",
+      "metricool_uuid": "3270097068352227966"
     }
   ]
 }
