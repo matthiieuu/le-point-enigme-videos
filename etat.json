@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 26,
-  "date_derniere_publication": "2026-11-16",
+  "derniere_enigme_publiee": 27,
+  "date_derniere_publication": "2026-11-17",
   "historique": [
     {
       "numero": 1,
@@ -237,6 +237,15 @@
       "canal": "Metricool",
       "test": "T24",
       "metricool_uuid": "3270097068352227966"
+    },
+    {
+      "numero": 27,
+      "titre": "Les œufs du cachot",
+      "date": "2026-11-17",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T25",
+      "metricool_uuid": "-3124654428275520551"
     }
   ]
 }
