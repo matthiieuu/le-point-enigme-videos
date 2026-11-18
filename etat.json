@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 27,
-  "date_derniere_publication": "2026-11-17",
+  "derniere_enigme_publiee": 28,
+  "date_derniere_publication": "2026-11-18",
   "historique": [
     {
       "numero": 1,
@@ -246,6 +246,15 @@
       "canal": "Metricool",
       "test": "T25",
       "metricool_uuid": "-3124654428275520551"
+    },
+    {
+      "numero": 28,
+      "titre": "Les pommes du cachot",
+      "date": "2026-11-18",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T26",
+      "metricool_uuid": "-7354166737516015707"
     }
   ]
 }

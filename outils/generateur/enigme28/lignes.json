@@ -1,0 +1,10 @@
+[
+["narr", "Il compte ses pommes, ou il reste enfermé !"],
+["narr", "Sur la table, il y a trois pommes."],
+["narr", "Le prisonnier en prend deux."],
+["gardien", "Combien de pommes as-tu ?"],
+[["prisonnier", "Une !"], ["gardien", "Ha ha ! Tu es sûr ?"]],
+["narr", "Combien de pommes a-t-il : une, deux, ou trois ?"],
+["narr", "Vite, écris ta réponse en commentaire !"],
+["narr", "Réponse d'hier : cinq minutes, pas quinze !"]
+]
