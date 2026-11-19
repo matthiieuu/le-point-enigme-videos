@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 28,
-  "date_derniere_publication": "2026-11-18",
+  "derniere_enigme_publiee": 29,
+  "date_derniere_publication": "2026-11-19",
   "historique": [
     {
       "numero": 1,
@@ -255,6 +255,15 @@
       "canal": "Metricool",
       "test": "T26",
       "metricool_uuid": "-7354166737516015707"
+    },
+    {
+      "numero": 29,
+      "titre": "Les 9 du cachot",
+      "date": "2026-11-19",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T27",
+      "metricool_uuid": "4671924080699983388"
     }
   ]
 }
