@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 29,
-  "date_derniere_publication": "2026-11-19",
+  "derniere_enigme_publiee": 30,
+  "date_derniere_publication": "2026-11-20",
   "historique": [
     {
       "numero": 1,
@@ -264,6 +264,15 @@
       "canal": "Metricool",
       "test": "T27",
       "metricool_uuid": "4671924080699983388"
+    },
+    {
+      "numero": 30,
+      "titre": "La grenouille du puits",
+      "date": "2026-11-20",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T29",
+      "metricool_uuid": "-1964157306537095713"
     }
   ]
 }

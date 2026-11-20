@@ -1,0 +1,11 @@
+[
+[["prisonnier", "Vingt !"], ["narr", "Si la grenouille sort, il est libre !"]],
+["narr", "Le puits fait vingt mètres."],
+["narr", "Le jour, elle monte de cinq mètres."],
+["narr", "La nuit, elle glisse de quatre mètres."],
+["gardien", "Quel jour sort-elle ?"],
+[["prisonnier", "Le vingtième !"], ["gardien", "Ha ha ! Tu es sûr ?"]],
+["narr", "Quel jour : vingt, seize, ou quinze ?"],
+["narr", "Vite, écris ta réponse en commentaire !"],
+["narr", "Réponse d'hier : vingt fois, pas dix !"]
+]
