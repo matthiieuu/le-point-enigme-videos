@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 30,
-  "date_derniere_publication": "2026-11-20",
+  "derniere_enigme_publiee": 31,
+  "date_derniere_publication": "2026-11-21",
   "historique": [
     {
       "numero": 1,
@@ -273,6 +273,15 @@
       "canal": "Metricool",
       "test": "T29",
       "metricool_uuid": "-1964157306537095713"
+    },
+    {
+      "numero": 31,
+      "titre": "Les microbes du bocal",
+      "date": "2026-11-21",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T30",
+      "metricool_uuid": "-7497205589519613398"
     }
   ]
 }

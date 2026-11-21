@@ -1,0 +1,559 @@
+import json, math, random, sys, subprocess, os
+import numpy as np
+from PIL import Image, ImageDraw, ImageFont
+import soundfile as sf
+
+W, H, FPS = 1080, 1920, 30
+FB = '/usr/share/fonts/truetype/google-fonts/Poppins-Bold.ttf'
+_fc = {}
+def F(s):
+    s = max(1, int(s))
+    if s not in _fc: _fc[s] = ImageFont.truetype(FB, s)
+    return _fc[s]
+
+
+# T30 (21/11) : titre court et intrigant au lieu du nom de l'énigme (« LES BACTÉRIES DU BOCAL »)
+NUM = "31"; TITRE = "ÇA VA DÉBORDER !"; CONTRAINTE = "SA LIBERTÉ EN JEU"
+TITRE_HIER = "LA GRENOUILLE DU PUITS"
+HOOK = ["LA BONNE MINUTE", "OU IL RESTE ENFERMÉ !"]
+CHR = 6.0
+D = json.load(open('durees.json'))
+SUBS = ["PRISONNIER : 30 ! La bonne minute, ou il reste enfermé !",
+        "Les microbes doublent chaque minute.",
+        "Avec 1 microbe, le bocal est plein en 60 minutes.",
+        "Là, il y a 2 microbes au départ.",
+        "GARDIEN : Plein en combien de minutes ?",
+        "PRISONNIER : 30 ! GARDIEN : Ha ha ! Tu es sûr ?",
+        "Combien de minutes : 30, 59, ou 60 ?",
+        "Vite, écris ta réponse en commentaire !",
+        "Réponse d'hier : jour 16, pas 20 !"]
+_SP = json.load(open('split.json')); SPLIT5 = _SP['split5']; SPLIT0 = _SP['split0']
+NL = len(SUBS)
+GAP = 0.3
+s0 = 0.0
+s1 = s0 + D[0] + 0.15
+s2 = s1 + D[1] + GAP
+s3 = s2 + D[2] + GAP
+s4 = s3 + D[3] + GAP
+s5b = s4 + D[4] + GAP          # ligne 5 : prisonnier « Le 20e ! » puis gardien
+sQ = s5b + D[5] + GAP
+CS = sQ + D[6] - 0.2
+CE = CS + CHR
+s5 = CE + 0.05
+STAMP = s5 + D[7] * 0.55
+ANS = s5 + D[7] + 0.2
+s6 = ANS + 0.2
+RELANCE = s6 + D[8] + 0.3      # T25 : la question revient en gros avant la boucle
+FADE = RELANCE + 0.9
+T = FADE + 0.4
+STARTS = [s0, s1, s2, s3, s4, s5b, sQ, s5, s6]
+NF = int(round(T * FPS))
+KEY = [["30", "minute", "enfermé"], ["doublent", "chaque", "minute"], ["1", "plein", "60"], ["2", "microbes", "départ"],
+       ["combien", "minutes"], ["30", "sûr"], ["30", "59", "60"], ["commentaire", "vite"], ["jour", "16", "pas", "20"]]
+TORCH = [(70, 640), (1010, 430)]
+
+exec(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'parts.py')).read())
+def _spread(sub, a, b): return [a + (b - a) * j / len(sub) * 0.9 for j in range(len(sub))]
+def _wt5():
+    ws = SUBS[5].split(); kg = ws.index('GARDIEN')
+    return ws, _spread(ws[:kg], s5b, s5b + SPLIT5 - 0.15) + _spread(ws[kg:], s5b + SPLIT5 - 0.1, s5b + D[5])
+WT[5] = _wt5()
+def _wt0():
+    ws = SUBS[0].split(); kg = ws.index('La')
+    return ws, _spread(ws[:kg], s0, s0 + SPLIT0 - 0.15) + _spread(ws[kg:], s0 + SPLIT0 - 0.05, s0 + D[0])
+WT[0] = _wt0()
+
+T_DOUBLE = wtime(1, 'doublent'); T_60 = wtime(2, '60'); T_2 = wtime(3, '2')
+DOUBLES = [T_DOUBLE, T_DOUBLE + 0.45, T_DOUBLE + 0.9]
+T_FAUX = s5b
+T_SOURIT = s5b + SPLIT5
+T_REP = wtime(8, '16')
+JUMP = ANS + 0.75
+CHRONO_XY = (900, 700)
+HOOK_END = 1.55; HOOK_UP = 2.0
+PY = 700
+FLOOR = 930
+XP, XG = 190, 890
+CHAR['PRISONNIER']['x'] = XP; CHAR['GARDIEN']['x'] = XG
+ORANGE = (255, 150, 40)
+GREEN = (90, 200, 120); RED = (230, 60, 50)
+MIC = (120, 220, 90); MICD = (30, 80, 30)
+# bocal de verre posé sur une table (centre)
+JX0, JX1, JTOP, JBOT = 360, 720, 600, 1050
+TY = 1050
+# puits de la réponse d'hier (#30)
+WX0, WX1, WTOP, WBOT = 200, 660, 430, 1250
+def YM(m): return 1180 - m * 36
+FX = WX1 - 52
+
+def wall(S, mode):
+    """mur de pierre brun-violet du donjon ; mode 'bocal' (scène) ou 'puits' (réponse d'hier)"""
+    rnd = random.Random(5)
+    im = Image.new('RGB', (W * S, H * S), (30, 21, 30))
+    d = ImageDraw.Draw(im)
+    y = 330 * S
+    while y < FLOOR * S:
+        hgt = rnd.randint(78, 96) * S
+        x = -rnd.randint(0, 120) * S
+        while x < W * S:
+            w = rnd.randint(130, 210) * S
+            b = rnd.randint(-10, 10)
+            col = (62 + b, 44 + b, 58 + b + rnd.randint(-4, 6))
+            d.rounded_rectangle([x + 4 * S, y + 4 * S, x + w - 4 * S, y + hgt - 4 * S], radius=12 * S, fill=col)
+            d.rounded_rectangle([x + 10 * S, y + 8 * S, x + w - 14 * S, y + 18 * S], radius=5 * S, fill=(col[0] + 9, col[1] + 7, col[2] + 9))
+            x += w
+        y += hgt
+    d.rectangle([0, 830 * S, W * S, FLOOR * S], fill=(52, 38, 40))
+    d.rectangle([0, FLOOR * S, W * S, H * S], fill=(26, 18, 25))
+    for i in range(22):
+        yy = (FLOOR + 20 + i * 48) * S
+        d.line([0, yy, W * S, yy], fill=(36, 26, 34), width=3 * S)
+    d.rectangle([0, 0, W * S, 330 * S], fill=(22, 15, 22))
+    for (tx, ty) in TORCH:
+        d.polygon([(tx - 18) * S, (ty + 20) * S, (tx + 18) * S, (ty + 20) * S, (tx + 8) * S, (ty + 110) * S, (tx - 8) * S, (ty + 110) * S], fill=(70, 46, 30))
+        d.rounded_rectangle([(tx - 26) * S, (ty + 8) * S, (tx + 26) * S, (ty + 30) * S], radius=6 * S, fill=(96, 66, 40))
+    if mode == 'puits': draw_well(im, S)
+    if mode == 'bocal':
+        # table de bois sous le bocal
+        d.rounded_rectangle([300 * S, TY * S, 780 * S, (TY + 46) * S], radius=10 * S, fill=(120, 78, 46), outline=(50, 30, 20), width=4 * S)
+        d.rectangle([310 * S, (TY + 40) * S, 770 * S, (TY + 52) * S], fill=(80, 50, 30))
+        for lx in (330, 730):
+            d.rectangle([lx * S, (TY + 46) * S, (lx + 22) * S, (TY + 200) * S], fill=(90, 58, 34))
+    return im
+
+def draw_well(im, S):
+    d = ImageDraw.Draw(im)
+    d.rectangle([WX0 * S, WTOP * S, WX1 * S, WBOT * S], fill=(18, 12, 18))
+    rnd = random.Random(9)
+    y = WTOP + 30
+    while y < WBOT:
+        x = WX0 - rnd.randint(0, 60)
+        while x < WX1:
+            w = rnd.randint(70, 120); b = rnd.randint(-6, 6)
+            d.rounded_rectangle([max(WX0, x + 3) * S, (y + 3) * S, min(WX1, x + w - 3) * S, (y + 44) * S], radius=8 * S, fill=(40 + b, 28 + b, 38 + b))
+            x += w
+        y += 48
+    d.rectangle([WX0 * S, WTOP * S, (WX0 + 22) * S, WBOT * S], fill=(12, 8, 12))
+    d.rectangle([(WX1 - 22) * S, WTOP * S, WX1 * S, WBOT * S], fill=(12, 8, 12))
+    d.rectangle([WX0 * S, (WBOT - 22) * S, WX1 * S, WBOT * S], fill=(40, 70, 90))
+    d.rounded_rectangle([(WX0 - 40) * S, (WTOP - 34) * S, (WX1 + 40) * S, (WTOP + 20) * S], radius=16 * S, fill=(96, 74, 86))
+    for k in range(7):
+        xx = WX0 - 40 + k * 78
+        d.line([xx * S, (WTOP - 34) * S, xx * S, (WTOP + 20) * S], fill=(70, 52, 62), width=4 * S)
+    d.rectangle([(WX0 - 40) * S, (WTOP - 34) * S, (WX1 + 40) * S, (WTOP - 24) * S], fill=(120, 96, 108))
+    gx = WX0 - 56
+    d.line([gx * S, YM(0) * S, gx * S, YM(20) * S], fill=(220, 200, 170), width=5 * S)
+    for m in range(21):
+        L = 26 if m % 5 == 0 else 13
+        d.line([gx * S, YM(m) * S, (gx + L) * S, YM(m) * S], fill=(220, 200, 170), width=4 * S)
+    for m in (0, 10, 20):
+        d.text(((gx - 10) * S, YM(m) * S), f"{m} M", font=F(34 * S), fill=(240, 225, 200), anchor='rm')
+
+def frog(d, x, y, t, sc=1.0, jump=0.0):
+    bob = 2 * math.sin(t * 6)
+    y = y + bob
+    k = 1 + 0.25 * jump
+    for sgn in (-1, 1):
+        d.ellipse([x + sgn * 26 * sc - 18 * sc, y + 18 * sc * k, x + sgn * 26 * sc + 18 * sc, y + 52 * sc * k], fill=(60, 140, 60))
+    d.ellipse([x - 40 * sc - 4, y - 36 * sc - 4, x + 40 * sc + 4, y + 40 * sc + 4], fill=(20, 50, 24))
+    d.ellipse([x - 40 * sc, y - 36 * sc, x + 40 * sc, y + 40 * sc], fill=(90, 190, 80))
+    d.ellipse([x - 22 * sc, y - 6 * sc, x + 22 * sc, y + 30 * sc], fill=(190, 230, 140))
+    for sgn in (-1, 1):
+        ex, ey = x + sgn * 20 * sc, y - 36 * sc
+        d.ellipse([ex - 15 * sc, ey - 15 * sc, ex + 15 * sc, ey + 15 * sc], fill=(90, 190, 80))
+        d.ellipse([ex - 9 * sc, ey - 9 * sc, ex + 9 * sc, ey + 9 * sc], fill=(255, 255, 255))
+        d.ellipse([ex - 4 * sc, ey - 5 * sc, ex + 4 * sc, ey + 3 * sc], fill=(20, 14, 16))
+        d.ellipse([x + sgn * 38 * sc - 10 * sc, y - 20 * sc, x + sgn * 38 * sc + 10 * sc, y], fill=(60, 140, 60))
+
+# --- microbes ---
+_r = random.Random(3)
+SPOTS = []
+for row in range(4):
+    for col in range(4):
+        SPOTS.append((JX0 + 52 + col * 85 + _r.randint(-6, 6), JBOT - 60 - row * 88 + _r.randint(-6, 6)))
+_order = [5, 6, 9, 10, 1, 2, 13, 14, 4, 7, 8, 11, 0, 3, 12, 15]
+SPOTS = [SPOTS[i] for i in _order]
+FULLDOTS = [(JX0 + 30 + _r.random() * (JX1 - JX0 - 60), JTOP + 40 + _r.random() * (JBOT - JTOP - 70)) for _ in range(150)]
+
+def microbe(d, x, y, t, r=26, k=0):
+    wob = 1 + 0.08 * math.sin(t * 7 + k)
+    rx, ry = r * wob, r / wob
+    d.ellipse([x - rx - 4, y - ry - 4, x + rx + 4, y + ry + 4], fill=MICD)
+    d.ellipse([x - rx, y - ry, x + rx, y + ry], fill=MIC)
+    for sgn in (-1, 1):
+        d.ellipse([x + sgn * r * 0.35 - 6, y - r * 0.3 - 7, x + sgn * r * 0.35 + 6, y - r * 0.3 + 7], fill=(255, 255, 255))
+        d.ellipse([x + sgn * r * 0.35 - 3, y - r * 0.3 - 3, x + sgn * r * 0.35 + 3, y - r * 0.3 + 4], fill=(20, 14, 16))
+    for a in range(6):
+        aa = a * math.pi / 3 + t * 2 + k
+        d.line([x + math.cos(aa) * r, y + math.sin(aa) * r, x + math.cos(aa) * (r + 9), y + math.sin(aa) * (r + 9)], fill=MICD, width=4)
+
+def jar_state(t):
+    """(nombre de microbes, plein ?, minute affichée)"""
+    if t < s1 - 0.1: return 2, False, 0
+    if t < s2 - 0.1:
+        n = 1; m = 0
+        for k, td in enumerate(DOUBLES):
+            if t >= td: n = 2 ** (k + 1); m = k + 1
+        return n, False, m
+    if t < s3 - 0.1:
+        if t >= T_60 - 0.1: return 0, True, 60
+        return 1, False, 0
+    return 2, False, 0
+
+def pop_scale(t):
+    for td in DOUBLES + [s1 - 0.1, s2 - 0.1, s3 - 0.1]:
+        if 0 <= t - td < 0.3: return 1 + 0.35 * (1 - (t - td) / 0.3)
+    return 1.0
+
+def jar_scene(img, t):
+    n, full, m = jar_state(t)
+    # verre (couche translucide)
+    lay = Image.new('RGBA', (W, H), (0, 0, 0, 0)); dl = ImageDraw.Draw(lay)
+    dl.rounded_rectangle([JX0, JTOP, JX1, JBOT], radius=50, fill=(170, 210, 230, 55), outline=(210, 235, 245, 220), width=8)
+    dl.rounded_rectangle([JX0 + 40, JTOP - 46, JX1 - 40, JTOP + 6], radius=14, fill=(150, 110, 70, 255), outline=(60, 40, 24, 255), width=5)
+    if full:
+        u = clamp((t - T_60 + 0.1) / 0.35)
+        top = JBOT - 10 - (JBOT - JTOP - 20) * ss(u)
+        dl.rounded_rectangle([JX0 + 10, top, JX1 - 10, JBOT - 10], radius=40, fill=(90, 190, 70, 230))
+    img.alpha_composite(lay)
+    d = ImageDraw.Draw(img)
+    if full:
+        u = clamp((t - T_60 + 0.1) / 0.35)
+        top = JBOT - 10 - (JBOT - JTOP - 20) * ss(u)
+        for k, (x, y) in enumerate(FULLDOTS):
+            if y > top + 14: microbe(d, x, y, t, r=13, k=k)
+    else:
+        ps = pop_scale(t)
+        r = 38 if n <= 2 else (33 if n <= 4 else 27)
+        for k in range(n):
+            x, y = SPOTS[k]
+            microbe(d, x, y, t, r=r * (ps if k >= n // 2 else 1), k=k)
+    # reflet du verre
+    d.line([JX0 + 26, JTOP + 60, JX0 + 26, JBOT - 80], fill=(230, 245, 255), width=6)
+    return n, full, m
+
+def badges(d, t, n, full, m):
+    # minute affichée sur le devant de la table
+    if s1 - 0.1 <= t < CE + 0.3:
+        txt = "60 MIN : PLEIN !" if full else f"MINUTE {m}"
+        badge(d, 540, TY + 24, txt, 1.0, fill=GREEN if full else (240, 230, 210), tcol=(255, 255, 255) if full else (24, 14, 20), size=40)
+    if s1 - 0.1 <= t < s2 - 0.1:
+        badge(d, 540, 470, "×2 CHAQUE MINUTE", ease_back((t - s1 + 0.1) / 0.3), size=56)
+        for td in DOUBLES:
+            if 0 <= t - td < 0.5:
+                text_stroke(d, (JX1 + 40, JTOP + 120 - 120 * (t - td)), "×2", F(70), (255, 214, 50), sw=6)
+    if s2 - 0.1 <= t < s3 - 0.1:
+        badge(d, 540, 470, "1 MICROBE : PLEIN EN 60 MIN", ease_back((t - s2 + 0.1) / 0.3), size=46)
+    if s3 - 0.1 <= t < sQ - 0.05:
+        badge(d, 540, 470, "2 MICROBES AU DÉPART", ease_back((t - s3 + 0.1) / 0.3), fill=ORANGE, size=52)
+    if sQ - 0.05 <= t < CE:
+        badge(d, 540, 470, "PLEIN EN COMBIEN DE MINUTES ?", ease_back((t - (sQ - 0.05)) / 0.25) * (1 + 0.04 * math.sin(t * 9)), fill=(255, 206, 40), size=44)
+    if s4 - 0.1 <= t < CE + 0.3:
+        v = ease_back((t - s4) / 0.3); pul = 1 + 0.05 * math.sin(t * 8)
+        text_stroke(d, (540 + 4 * math.sin(t * 5), JTOP + 150), "?", F(int(130 * clamp(v, 0, 1.1) * pul) + 1), (255, 214, 50), sw=8)
+
+# --- réponse #30 : la grenouille sort le 16e jour (jour 15 au soir : 15 m ; jour 16 : +5 m = 20 m, pas de glissade) ---
+def answer_scene(d, t, img):
+    u = ss((t - JUMP) / 0.5) if t >= JUMP else 0
+    m = 15 + 5 * u
+    gx = WX0 - 56
+    d.line([WX0 + 24, YM(20), WX1 - 24, YM(20)], fill=(255, 206, 40), width=6)
+    d.polygon([(gx + 4, YM(m)), (gx + 30, YM(m) - 14), (gx + 30, YM(m) + 14)], fill=(255, 206, 40))
+    frog(d, FX - 6, YM(m) - 14 - (50 * math.sin(math.pi * u) if 0 < u < 1 else 0), t, 1.3, 1.0 if 0 < u < 1 else 0)
+    if t >= ANS + 0.1:
+        badge(d, 860, 520, "JOUR 15 : 15 M", ease_back((t - ANS - 0.1) / 0.3), fill=(240, 230, 210), size=44)
+    if t >= JUMP:
+        badge(d, 860, 640, "JOUR 16 : +5 M", ease_back((t - JUMP) / 0.3), fill=ORANGE, size=44)
+    if t >= JUMP + 0.45:
+        badge(d, 860, 760, "SORTIE !", ease_back((t - JUMP - 0.45) / 0.3), fill=GREEN, tcol=(255, 255, 255), size=52)
+    if t >= RELANCE: return
+    if t >= T_REP - 0.2:
+        badge(d, 540, 1330, "JOUR 16 !", ease_back((t - T_REP + 0.2) / 0.3), fill=GREEN, tcol=(255, 255, 255), size=96)
+    tp = wtime(8, 'pas') - 0.15
+    if t >= tp:
+        u = ease_back((t - tp) / 0.3)
+        badge(d, 860, 920, "JOUR 20", u, fill=(150, 140, 150), tcol=(60, 50, 60), size=60)
+        if t >= tp + 0.2:
+            v = clamp((t - tp - 0.2) / 0.2)
+            a, b = (720, 950), (1000, 890)
+            xe = (a[0] + (b[0] - a[0]) * v, a[1] + (b[1] - a[1]) * v)
+            d.line([a, xe], fill=(16, 10, 16), width=16)
+            d.line([a, xe], fill=RED, width=9)
+            badge(d, 860, 1040, "PAS DE GLISSADE", v, fill=(255, 206, 40), size=40)
+
+BUBS = [
+    ('GARDIEN', "Plein en combien de minutes ?", lambda: s4 - 0.1, lambda: s5b - 0.05, 850, 640, 890),
+    ('PRISONNIER', "30 !", lambda: T_FAUX - 0.1, lambda: sQ, 240, 720, 200),
+    ('GARDIEN', "HA HA ! Tu es sûr ?", lambda: T_SOURIT, lambda: sQ, 850, 640, 890),
+]
+
+def cam(t):
+    z, x, y = cam0(t)
+    for st in STARTS[:8]:
+        if 0 <= t - st < 0.3:
+            z *= 1 + 0.07 * (1 - ss((t - st) / 0.3))
+    return z, x, y
+
+def cam0(t):
+    keys = [(0, 1.10, XP, 920), (0.4, 1.0, 540, 960), (s1 - 0.1, 1.0, 540, 960),
+            (s1 + 0.3, 1.05, 540, 840), (s4 - 0.2, 1.05, 540, 840), (s4 + 0.2, 1.04, 620, 960), (s5b - 0.2, 1.04, 620, 960),
+            (s5b + 0.3, 1.04, 460, 960), (T_SOURIT - 0.1, 1.04, 460, 960), (T_SOURIT + 0.3, 1.04, 620, 960), (sQ - 0.1, 1.04, 620, 960),
+            (sQ + 0.4, 1.0, 540, 960), (CE, 1.03, 540, 1000), (CE + 0.6, 1.02, 540, 980), (ANS, 1.02, 540, 980)]
+    for a, b in zip(keys, keys[1:]):
+        if a[0] <= t <= b[0]:
+            u = ss((t - a[0]) / max(1e-6, b[0] - a[0]))
+            if a[0] == 0: u = 1 - (1 - clamp((t - a[0]) / (b[0] - a[0]))) ** 3
+            return tuple(a[k] + (b[k] - a[k]) * u for k in (1, 2, 3))
+    return keys[-1][1:]
+
+def shake(t):
+    sx = sy = 0
+    for hh, amp in [(0.0, 16), (T_DOUBLE, 6), (T_60, 10), (T_2, 6), (T_FAUX, 12), (T_SOURIT, 14), (sQ, 8), (STAMP, 18)]:
+        if 0 <= t - hh < 0.35:
+            a = (1 - (t - hh) / 0.35) * amp
+            sx += a * math.sin((t - hh) * 90 + 1.0); sy += a * math.cos((t - hh) * 77)
+    return sx, sy
+def mouth_at(i, t):
+    st = STARTS[i]
+    if not (st + 0.02 <= t < st + D[i]): return 0
+    k = int((t - st) * FPS); e = G[f'env{i}']
+    return clamp(e[k] * 1.6) if k < len(e) else 0
+
+def init():
+    random.seed(1)
+    for nm, im in [('c', wall(2, 'bocal')), ('k', wall(2, 'puits'))]:
+        base = np.asarray(im.resize((W, H), Image.LANCZOS)).astype(np.float32)
+        G[nm + 'dark'] = Image.fromarray(np.clip(base * 0.85 + glow_layer(0.26) * 0.6, 0, 255).astype(np.uint8))
+        G[nm + 'lit'] = Image.fromarray(np.clip(base * 1.0 + glow_layer(0.48) * 0.7, 0, 255).astype(np.uint8))
+    G['vig'] = vignette()
+    G['red'] = vignette((200, 0, 0), 1.6, 1.0)
+    G['top'] = grad_band(0, 380, 0.92, top_solid=True)
+    G['sub'] = grad_band(1360, 1600, 0.75)
+    G['hookband'] = grad_band(520, 1020, 0.6)
+    G['sil'] = silhouette()
+    G['rd'] = stamp_img('RÉPONSE DEMAIN', (230, 46, 46), 76, 30, rot=-9)
+    G['night'] = Image.new('RGBA', (W, H), (20, 30, 90, 0))
+    for i in (0, 4, 5): G[f'env{i}'] = mouth_env(i)
+
+def chains(d):
+    # chaîne du prisonnier scellée dans le mur de gauche
+    x0 = XP - 40; y0 = PY + 500
+    for k in range(6):
+        cx = 6 + k * (x0 - 6) / 5; cy = y0 + 14 * math.sin(k / 5 * math.pi)
+        if k % 2: d.ellipse([cx - 12, cy - 6, cx + 12, cy + 6], outline=(160, 160, 172), width=5)
+        else: d.ellipse([cx - 7, cy - 10, cx + 7, cy + 10], outline=(160, 160, 172), width=5)
+    d.rounded_rectangle([x0 - 6, y0 - 12, x0 + 30, y0 + 12], radius=6, fill=(120, 120, 132), outline=(30, 24, 30), width=3)
+
+def scene(t):
+    f = 0.5 + 0.22 * math.sin(t * 7.1) + 0.12 * math.sin(t * 13.7 + 1) + 0.08 * math.sin(t * 29)
+    img = Image.blend(G['cdark'], G['clit'], clamp(f)).convert('RGBA')
+    d = ImageDraw.Draw(img)
+    for k, (tx, ty) in enumerate(TORCH): flame(d, tx, ty + 8, t, k * 3)
+    d = ImageDraw.Draw(img)
+    pm = mouth_at(5, t) if T_FAUX <= t < T_SOURIT - 0.1 else (mouth_at(0, t) if t < SPLIT0 - 0.1 else 0)
+    gm = mouth_at(4, t) or (mouth_at(5, t) if t >= T_SOURIT - 0.05 else 0)
+    mood = 0 if t < SPLIT0 else (-1 if t < T_FAUX - 0.6 else 0)
+    im = draw_person('GARDIEN', t + 1, gm, (t % 2.9) < 0.12, 1 if t >= T_SOURIT else 0, label='GARDIEN')
+    img.alpha_composite(im, (int(XG - 150), PY))
+    im = draw_person('PRISONNIER', t, pm, (t % 3.2) < 0.12, mood, label='PRISONNIER')
+    img.alpha_composite(im, (int(XP - 150), PY))
+    d = ImageDraw.Draw(img)
+    chains(d)
+    n, full, m = jar_scene(img, t)
+    d = ImageDraw.Draw(img)
+    badges(d, t, n, full, m)
+    for (who, txt, t0f, t1f, cx, cy, tx) in BUBS:
+        t0, t1 = t0f(), t1f()
+        if t0 <= t < t1:
+            small_bubble(img, d, cx, cy, txt, CHAR[who]['col'], ease_back((t - t0) / 0.25), int((t - t0 - 0.15) * 30), tail_x=tx, maxw=380)
+    img.alpha_composite(G['sil'], (-70, 1250))
+    return img
+
+def shout(img, t):
+    """T27 : à 0,0 s le prisonnier crie la réponse piège « 30 ! » (bulle en coordonnées écran, sous le hook)"""
+    if t >= SPLIT0 + 0.6: return
+    d = ImageDraw.Draw(img)
+    u = ease_back(t / 0.2) if t > 0 else 1.0
+    a = 1.0 if t < SPLIT0 + 0.45 else clamp((SPLIT0 + 0.6 - t) / 0.15)
+    sc = clamp(u, 0.05, 1.2) * a
+    cx, cy = 440, 1075; w, h = 250 * sc, 120 * sc
+    if w < 10: return
+    d.polygon([(cx - 90 * sc, cy + 10), (cx - 40 * sc, cy + 30), (262, 1000)], fill=(16, 10, 16))
+    d.rounded_rectangle([cx - w / 2 - 7, cy - h / 2 - 7, cx + w / 2 + 7, cy + h / 2 + 7], radius=int(40 * sc) + 7, fill=CHAR['PRISONNIER']['col'])
+    d.polygon([(cx - 80 * sc, cy + 6), (cx - 44 * sc, cy + 24), (274, 1008)], fill=(255, 255, 255))
+    d.rounded_rectangle([cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2], radius=int(40 * sc), fill=(255, 255, 255))
+    d.text((cx, cy + 4), "30 !", font=F(int(92 * sc)), fill=(220, 40, 40), anchor='mm')
+
+
+def hook(img, t):
+    if t >= HOOK_UP: return
+    if t < HOOK_END:
+        img.alpha_composite(G['hookband'])
+    d = ImageDraw.Draw(img)
+    sc = 1 + 0.25 * max(0, 1 - t / 0.15)
+    y0 = 800
+    if t >= HOOK_END:
+        u = ss((t - HOOK_END) / (HOOK_UP - HOOK_END))
+        sc = 1 - 0.6 * u; y0 = 800 - 620 * u
+    a = 255 if t < HOOK_UP - 0.15 else int(255 * clamp((HOOK_UP - t) / 0.15))
+    lay = Image.new('RGBA', (W, H), (0, 0, 0, 0)); dl = ImageDraw.Draw(lay)
+    fs = int(124 * sc)
+    while max(dl.textlength(l, font=F(fs)) for l in HOOK) > 1010: fs -= 2
+    for k, ln in enumerate(HOOK):
+        col = (255, 214, 50) if k != len(HOOK) - 1 else (255, 80, 60)
+        dl.text((W / 2, y0 + (k - (len(HOOK) - 1) / 2) * fs * 1.08), ln, font=F(fs), fill=col + (255,), stroke_width=max(3, int(12 * sc)), stroke_fill=(10, 6, 12, 255), anchor='mm')
+    if a < 255: lay.putalpha(lay.getchannel('A').point(lambda v: v * a // 255))
+    img.alpha_composite(lay)
+
+
+def ui_top(img, d, t, answer=False):
+    img.alpha_composite(G['top'])
+    d.rectangle([0, 0, int(W * t / T), 12], fill=(255, 206, 40))
+    pill = "RÉPONSE D'HIER" if answer else f"ÉNIGME #{NUM}"
+    f = F(38); tw = d.textlength(pill, font=f)
+    d.rounded_rectangle([40, 40, 40 + tw + 44, 98], radius=29, fill=(255, 206, 40) if not answer else (90, 200, 120))
+    d.text((62, 69), pill, font=f, fill=(24, 14, 20), anchor='lm')
+    if not answer:
+        # pastille PIÈGE dès 0,0 s
+        px = 40 + tw + 44 + 16; pul = 1 + 0.06 * math.sin(t * 8)
+        fp = F(int(34 * pul)); pw = d.textlength("PIÈGE", font=fp)
+        d.rounded_rectangle([px, 69 - 29 * pul, px + pw + 40, 69 + 29 * pul], radius=29, fill=(220, 40, 40), outline=(255, 255, 255), width=3)
+        d.text((px + 20 + pw / 2, 70), "PIÈGE", font=fp, fill=(255, 255, 255), anchor='mm')
+        f2 = F(30); lab = "DIFFICULTÉ "
+        x = W - 40 - d.textlength(lab, font=f2) - 5 * 30
+        d.text((x, 69), lab, font=f2, fill=(255, 255, 255), anchor='lm')
+        x += d.textlength(lab, font=f2)
+        for k in range(5):
+            d.ellipse([x + k * 30 + 2, 57, x + k * 30 + 24, 79], fill=(255, 80, 60) if k < 4 else (90, 80, 90))
+    title = TITRE_HIER if answer else TITRE
+    tu = 1.0 if answer else (ease_back((t - (HOOK_UP - 0.15)) / 0.3) if t >= HOOK_UP - 0.15 else 0)
+    if tu > 0:
+        ft = F(80 * clamp(tu, 0.05, 1.15))
+        tw = sum(d.textlength(ch, font=ft) for ch in title)
+        while tw > 1000:
+            ft = F(ft.size - 2); tw = sum(d.textlength(ch, font=ft) for ch in title)
+        x = W / 2 - tw / 2
+        for k, ch in enumerate(title):
+            cw = d.textlength(ch, font=ft)
+            y = 175 + 7 * math.sin(t * 4 + k * 0.45)
+            d.text((x + cw / 2, y), ch, font=ft, fill=(255, 214, 50), stroke_width=7, stroke_fill=(20, 10, 16), anchor='mm')
+            x += cw
+    if not answer:
+        f3 = F(38); tw = d.textlength(CONTRAINTE, font=f3)
+        d.rounded_rectangle([W / 2 - tw / 2 - 26, 252, W / 2 + tw / 2 + 26, 312], radius=30, fill=(200, 44, 44))
+        d.text((W / 2, 283), CONTRAINTE, font=f3, fill=(255, 255, 255), anchor='mm')
+
+
+
+def outro_cta(img, d, t):
+    if not (s5 - 0.05 <= t < ANS): return
+    u = ease_back((t - s5) / 0.3)
+    f = F(int(56 * clamp(u, 0, 1.2)) + 1)
+    y = 560
+    d.rounded_rectangle([60, y - 120, W - 60, y + 120], radius=40, fill=(16, 10, 16))
+    d.rounded_rectangle([60, y - 120, W - 60, y + 120], radius=40, outline=(255, 206, 40), width=6)
+    d.text((W / 2, y - 40), "ÉCRIS 30, 59 OU 60", font=f, fill=(255, 255, 255), anchor='mm')
+    d.text((W / 2, y + 44), "EN COMMENTAIRE", font=f, fill=(255, 214, 50), anchor='mm')
+    if t >= STAMP:
+        sc = 1 + 1.6 * max(0, 1 - (t - STAMP) / 0.13)
+        st = G['rd']; s = st.resize((int(st.width * sc), int(st.height * sc)), Image.BILINEAR)
+        img.alpha_composite(s, (int(W / 2 - s.width / 2), int(800 - s.height / 2)))
+
+CHN = [('30', 'MIN', '30', 0), ('59', 'MIN', '59', 0), ('60', 'MIN', '60', 0)]
+CHC = [(255, 150, 40), (80, 150, 230), (180, 110, 230)]
+def choices(img, d, t):
+    """T23 : les 3 choix sont visibles dès 0,0 s (sous le hook) ; chaque choix grossit quand la voix le dit"""
+    if not (t < ANS): return
+    for k, (big, small, w_, nth) in enumerate(CHN):
+        col = CHC[k]
+        u = 1 + 0.1 * max(0, 1 - t / 0.2)
+        if u <= 0: continue
+        ts = wtime(6, w_, nth) - 0.1
+        pul = 1.0
+        if ts <= t < ts + 0.45: pul = 1 + 0.14 * math.sin(math.pi * (t - ts) / 0.45)
+        if CS <= t < CE and int((t - CS) * 3) % 3 == k: pul = 1.08
+        s = u * pul
+        x = 195 + k * 345; y = 1290
+        bw, bh = 310 * s, 160 * s
+        d.rounded_rectangle([x - bw / 2 - 7, y - bh / 2 - 7, x + bw / 2 + 7, y + bh / 2 + 7], radius=int(46 * s) + 7, fill=col)
+        d.rounded_rectangle([x - bw / 2, y - bh / 2, x + bw / 2, y + bh / 2], radius=int(46 * s), fill=(26, 18, 30))
+        if s > 0.3:
+            d.text((x, y + 24 * s), big, font=F(90 * s), fill=(255, 255, 255), anchor='mm')
+            d.text((x, y - 50 * s), small, font=F(34 * s), fill=col, anchor='mm')
+
+def relance(img, t):
+    """T25 : la dernière seconde rejoue la question en gros avant de boucler sur l'image 0"""
+    if t < RELANCE: return
+    u = ease_back((t - RELANCE) / 0.25)
+    dk = Image.new('RGBA', (W, H), (10, 6, 12, int(215 * clamp((t - RELANCE) / 0.2))))
+    img.alpha_composite(dk)
+    d = ImageDraw.Draw(img)
+    sc = clamp(u, 0.05, 1.2) * (1 + 0.03 * math.sin(t * 10))
+    text_stroke(d, (W / 2, 820), "ET AUJOURD'HUI ?", F(int(70 * sc)), (255, 255, 255), sw=8)
+    text_stroke(d, (W / 2, 990), "30, 59 OU 60 ?", F(int(130 * sc)), (255, 214, 50), sw=12)
+    text_stroke(d, (W / 2, 1140), "PLEIN EN COMBIEN DE MINUTES ?", F(int(54 * sc)), (255, 120, 80), sw=8)
+
+def answer_frame(t):
+    f = 0.5 + 0.22 * math.sin(t * 7.1) + 0.12 * math.sin(t * 13.7 + 1)
+    img = Image.blend(G['kdark'], G['klit'], clamp(f)).convert('RGBA')
+    d = ImageDraw.Draw(img)
+    for k, (tx, ty) in enumerate(TORCH): flame(d, tx, ty + 8, t, k * 3)
+    answer_scene(d, t, img)
+    img.alpha_composite(G['sil'], (-70, 1250))
+    return img
+
+def frame(fi):
+    t = fi / FPS
+    if t < ANS:
+        img = camera(scene(t), t)
+        img.alpha_composite(G['vig'])
+        red_vig(img, t)
+        d = ImageDraw.Draw(img)
+        ui_top(img, d, t)
+        chrono(img, d, t)
+        outro_cta(img, d, t)
+        choices(img, d, t)
+        if t < ANS - 0.3: img.alpha_composite(G['sub'])
+        d = ImageDraw.Draw(img)
+        if t < ANS - 0.05: draw_subs(img, d, t)
+        shout(img, t)
+        hook(img, t)
+        if ANS - 0.25 < t: img = Image.blend(img, Image.new('RGBA', (W, H), (0, 0, 0, 255)), clamp((t - (ANS - 0.25)) / 0.25))
+    else:
+        img = answer_frame(t)
+        img.alpha_composite(G['vig'])
+        d = ImageDraw.Draw(img)
+        ui_top(img, d, t, answer=True)
+        img.alpha_composite(G['sub'])
+        d = ImageDraw.Draw(img)
+        if t < RELANCE: draw_subs(img, d, t)
+        relance(img, t)
+        if t < ANS + 0.25: img = Image.blend(Image.new('RGBA', (W, H), (0, 0, 0, 255)), img, clamp((t - ANS) / 0.25))
+    if t >= FADE:
+        if 'f0' not in G: G['f0'] = frame(0)
+        img = Image.blend(img.convert('RGB'), G['f0'], clamp((t - FADE) / 0.4))
+    return img.convert('RGB')
+
+def work(fi):
+    return frame(fi).tobytes()
+
+if __name__ == '__main__':
+    import multiprocessing as mp
+    mode = sys.argv[1]
+    if mode == 'still':
+        init()
+        for tt in sys.argv[2:]:
+            fi = min(NF - 1, int(float(tt) * FPS))
+            frame(fi).save(f'f_{tt}.png')
+        print('T60', T_60, 'T', T, 'CS', CS, 'ANS', ANS, 'starts', [round(x, 2) for x in STARTS], 'faux', T_FAUX)
+    else:
+        json.dump({'T': T, 'starts': STARTS, 'CS': CS, 'CE': CE, 'CHR': CHR, 'STAMP': STAMP, 'ANS': ANS, 'FADE': FADE, 'FAUXT': T_FAUX, 'DOUBLES': DOUBLES, 'T60': T_60, 'T2': T_2, 'JUMP': JUMP, 'SPLIT': T_SOURIT, 'RELANCE': RELANCE, 'NF': NF}, open('timeline.json', 'w'))
+        p = subprocess.Popen(['ffmpeg', '-y', '-loglevel', 'error', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
+                              '-c:v', 'libx264', '-crf', '24', '-preset', 'medium', '-pix_fmt', 'yuv420p', 'video_seule.mp4'], stdin=subprocess.PIPE)
+        with mp.Pool(mp.cpu_count(), initializer=init) as pool:
+            for k, b in enumerate(pool.imap(work, range(NF), chunksize=4)):
+                p.stdin.write(b)
+                if k % 150 == 0: print(k, NF, flush=True)
+        p.stdin.close(); p.wait()
+        print('ok')
+
