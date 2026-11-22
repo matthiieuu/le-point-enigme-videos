@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 31,
-  "date_derniere_publication": "2026-11-21",
+  "derniere_enigme_publiee": 32,
+  "date_derniere_publication": "2026-11-22",
   "historique": [
     {
       "numero": 1,
@@ -282,6 +282,15 @@
       "canal": "Metricool",
       "test": "T30",
       "metricool_uuid": "-7497205589519613398"
+    },
+    {
+      "numero": 32,
+      "titre": "Le livre du marchand",
+      "date": "2026-11-22",
+      "heure": "10:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T31",
+      "metricool_uuid": "-3563012430753545653"
     }
   ]
 }

@@ -1,0 +1,10 @@
+[
+["narr", "Le bon prix, et il est libre !"],
+["narr", "Ce livre coûte dix euros."],
+["narr", "Plus la moitié de son prix."],
+["gardien", "Combien coûte le livre ?"],
+[["prisonnier", "Quinze euros !"], ["gardien", "Ha ha ! Tu es sûr ?"]],
+["narr", "Combien d'euros : quinze, vingt, ou dix ?"],
+["narr", "Vite, écris ta réponse en commentaire !"],
+["narr", "Réponse d'hier : cinquante-neuf ! Deux microbes, c'est déjà la minute un."]
+]
