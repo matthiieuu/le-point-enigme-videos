@@ -1,0 +1,12 @@
+[
+["narr", "Un cheval décide de sa liberté !"],
+["narr", "Le gardien achète un cheval soixante euros."],
+["narr", "Il le vend soixante-dix euros."],
+["narr", "Il le rachète quatre-vingts euros."],
+["narr", "Puis il le revend quatre-vingt-dix euros."],
+["gardien", "Combien j'ai gagné ?"],
+[["prisonnier", "Dix euros !"], ["gardien", "Ha ha ! Tu es sûr ?"]],
+["narr", "Combien d'euros gagnés : dix, vingt, ou zéro ?"],
+["narr", "Vite, écris ta réponse en commentaire !"],
+["narr", "Réponse d'hier : vingt euros ! Dix, plus la moitié de vingt."]
+]

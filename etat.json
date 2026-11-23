@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 32,
-  "date_derniere_publication": "2026-11-22",
+  "derniere_enigme_publiee": 33,
+  "date_derniere_publication": "2026-11-23",
   "historique": [
     {
       "numero": 1,
@@ -291,6 +291,15 @@
       "canal": "Metricool",
       "test": "T31",
       "metricool_uuid": "-3563012430753545653"
+    },
+    {
+      "numero": 33,
+      "titre": "Le cheval du gardien",
+      "date": "2026-11-23",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T32",
+      "metricool_uuid": "5005912106471804582"
     }
   ]
 }
