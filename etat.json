@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 33,
-  "date_derniere_publication": "2026-11-23",
+  "derniere_enigme_publiee": 34,
+  "date_derniere_publication": "2026-11-24",
   "historique": [
     {
       "numero": 1,
@@ -300,6 +300,15 @@
       "canal": "Metricool",
       "test": "T32",
       "metricool_uuid": "5005912106471804582"
+    },
+    {
+      "numero": 34,
+      "titre": "Les sœurs du prisonnier",
+      "date": "2026-11-24",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T34",
+      "metricool_uuid": "-4573750448542691958"
     }
   ]
 }

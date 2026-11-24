@@ -1,0 +1,10 @@
+[
+["narr", "Quatre sœurs décident de sa liberté !"],
+["narr", "Ce prisonnier a quatre sœurs."],
+["narr", "Chaque sœur a un seul frère."],
+["gardien", "Combien d'enfants dans ta famille ?"],
+[["prisonnier", "Huit !"], ["gardien", "Ha ha ! Tu es sûr ?"]],
+["narr", "Combien d'enfants : cinq, huit, ou neuf ?"],
+["narr", "Vite, écris ta réponse en commentaire !"],
+["narr", "Réponse d'hier : vingt euros ! Dix, plus dix."]
+]
