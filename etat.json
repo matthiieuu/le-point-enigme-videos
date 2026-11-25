@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 34,
-  "date_derniere_publication": "2026-11-24",
+  "derniere_enigme_publiee": 35,
+  "date_derniere_publication": "2026-11-25",
   "historique": [
     {
       "numero": 1,
@@ -309,6 +309,16 @@
       "canal": "Metricool",
       "test": "T34",
       "metricool_uuid": "-4573750448542691958"
+    },
+    {
+      "numero": 35,
+      "titre": "Les billes dans le noir",
+      "date": "2026-11-25",
+      "heure": "18:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T35",
+      "hook": "2 BILLES BLEUES / ET IL EST LIBRE !",
+      "metricool_uuid": "6699147685952571454"
     }
   ]
 }
