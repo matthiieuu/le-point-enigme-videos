@@ -1,0 +1,10 @@
+[
+["narr", "La bonne vitesse, et il est libre !"],
+["narr", "La charrette va au village à trente kilomètres heure."],
+["narr", "Elle revient par la même route, à soixante."],
+["gardien", "Quelle est sa vitesse moyenne ?"],
+[["prisonnier", "Quarante-cinq !"], ["gardien", "Ha ha ! Tu es sûr ?"]],
+["narr", "Quarante-cinq, quarante, ou cinquante ?"],
+["narr", "Écris ta réponse en commentaire !"],
+["narr", "Hier : cinq billes !"]
+]

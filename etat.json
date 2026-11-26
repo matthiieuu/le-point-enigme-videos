@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 35,
-  "date_derniere_publication": "2026-11-25",
+  "derniere_enigme_publiee": 36,
+  "date_derniere_publication": "2026-11-26",
   "historique": [
     {
       "numero": 1,
@@ -319,6 +319,16 @@
       "test": "T35",
       "hook": "2 BILLES BLEUES / ET IL EST LIBRE !",
       "metricool_uuid": "6699147685952571454"
+    },
+    {
+      "numero": 36,
+      "titre": "La charrette",
+      "date": "2026-11-26",
+      "heure": "10:00 Europe/Paris",
+      "canal": "Metricool",
+      "test": "T36",
+      "hook": "LA BONNE VITESSE / ET IL EST LIBRE !",
+      "metricool_uuid": "-8822694869655140173"
     }
   ]
 }
