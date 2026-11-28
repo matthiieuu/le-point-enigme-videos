@@ -1,6 +1,6 @@
 {
   "derniere_enigme_publiee": 37,
-  "date_derniere_publication": "2026-11-27",
+  "date_derniere_publication": "2026-11-28",
   "historique": [
     {
       "numero": 1,
@@ -333,11 +333,16 @@
     {
       "numero": 37,
       "titre": "Le trou du cachot",
-      "date": "2026-11-27",
+      "date": "2026-11-28",
       "heure": "10:00 Europe/Paris",
       "canal": "Metricool",
       "test": "T37",
-      "metricool_uuid": "4034731843272984897"
+      "metricool_uuid": "8925933766291899488",
+      "echec_27_11": {
+        "uuid": "4034731843272984897",
+        "erreur": "You have reached your Metricool account limit."
+      },
+      "note": "Non publiée le 27/11 (limite du compte Metricool) ; reprogrammée telle quelle le 28/11 10:00."
     }
   ]
 }
