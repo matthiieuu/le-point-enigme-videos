@@ -1,6 +1,6 @@
 {
-  "derniere_enigme_publiee": 37,
-  "date_derniere_publication": "2026-11-28",
+  "derniere_enigme_publiee": 36,
+  "date_derniere_publication": "2026-11-26",
   "historique": [
     {
       "numero": 1,
@@ -342,7 +342,9 @@
         "uuid": "4034731843272984897",
         "erreur": "You have reached your Metricool account limit."
       },
-      "note": "Non publiée le 27/11 (limite du compte Metricool) ; reprogrammée telle quelle le 28/11 10:00."
+      "note": "Non publiée le 27/11 (limite du compte Metricool) ; reprogrammée telle quelle le 28/11 10:00.",
+      "statut": "ERROR x2 (limite du compte Metricool)"
     }
-  ]
+  ],
+  "note_blocage": "28/11 : #37 refusée 2 fois par Metricool (27/11 et 28/11 10:00) : 'You have reached your Metricool account limit.' Vidéo #37 prête (commit 00a6c51, media static.metricool.com/planner/202611/7473235-file-6536601942762372735.mp4). Prochaine exécution : re-tenter #37 (pas #38) une seule fois ; si la limite persiste, ne rien programmer et prévenir Matthieu."
 }
